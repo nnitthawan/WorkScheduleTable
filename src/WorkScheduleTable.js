@@ -161,14 +161,15 @@ export default function WorkScheduleTable() {
         </tbody>
       </table>
 
-      <div className="summary-box mt-6 p-4 bg-pink-50 border border-pink-200 rounded-xl">
-        <h2 className="font-semibold text-lg mb-2">📊 สรุปผล</h2>
+      <div className="summary-box mt-6 p-6 bg-gradient-to-br from-pink-100 via-pink-50 to-white border border-pink-200 rounded-xl shadow-md">
+        <h2 className="font-semibold text-lg mb-3 text-pink-600">📊 สรุปผล</h2>
         <p>✅ จำนวนวันที่มาทำงาน: <strong>{totalWorkDays}</strong> วัน</p>
         <p>💰 รวมค่าตอบแทนทั้งหมด: <strong>{totalPay.toLocaleString()} บาท</strong></p>
         <p>📅 วันหยุดทั้งหมด: <strong>{totalHolidays}</strong> วัน</p>
         <p>📅 วันที่เหลือที่ต้องทำงาน: <strong>{remainingWorkDays}</strong> วัน</p>
         <p>💵 รวมค่าตอบแทนรวม (รวมวันที่ยังไม่ได้ติ๊ก): <strong>{totalSalary.toLocaleString()} บาท</strong></p>
       </div>
+
     </div>
   );
 }

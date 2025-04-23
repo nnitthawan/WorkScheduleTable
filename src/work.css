@@ -1,5 +1,5 @@
 /* ใช้ฟอนต์ที่ดูน่ารักและมีสไตล์ */
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500&family=Poppins:wght@300;400;600&family:Sarabun:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500&family:Poppins:wght@300;400;600&family:Sarabun:wght@300;400;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap');
 
 /* พื้นฐานของ body */
@@ -14,11 +14,12 @@ body {
   align-items: center;
   min-height: 100vh;
   flex-direction: column;
+  overflow-x: hidden; /* ป้องกันการเลื่อนในแนวนอน */
 }
 
 /* ตั้งค่าของ container ของตาราง */
 .container {
-  max-width: 1200px;
+  max-width: 100%; /* ใช้ความกว้างสูงสุดของหน้าจอ */
   margin: 0 auto;
   padding: 20px;
   background-color: white;
@@ -26,7 +27,7 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 100%;
   box-sizing: border-box;
-  overflow-x: auto; /* ป้องกันการเลื่อนในแนวนอน */
+  overflow: hidden; /* ป้องกันการเลื่อนภายในกรอบ */
 }
 
 /* การตั้งค่าตาราง */
@@ -36,44 +37,26 @@ table {
   margin-top: 20px;
   background-color: #ffffff;
   border-radius: 10px;
-  table-layout: fixed; /* ป้องกันการขยายเกินขอบ */
+  table-layout: auto; /* ใช้ auto เพื่อให้คอลัมน์พอดีกับขนาดหน้าจอ */
+}
+
+th, td {
+  padding: 12px;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: 300;
+  color: #444;
 }
 
 th {
   background-color: #ff66b2; /* สีชมพูสด */
   color: white;
-  padding: 12px;
-  text-align: center;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
-td {
-  padding: 12px;
-  border: 1px solid #e0e0e0;
-  text-align: center;
-  vertical-align: middle;
-  font-weight: 300;
-  color: #444;
-  transition: background-color 0.3s ease;
-  word-wrap: break-word; /* หักคำหากเกินขอบ */
-}
-
-td:hover {
-  background-color: #ffb3d9; /* สีชมพูอ่อนเมื่อ hover */
-  cursor: pointer;
-}
-
-tr {
-  transition: background-color 0.3s ease;
-}
-
-tr:hover {
-  background-color: #ffe6f7; /* สีชมพูพาสเทลเมื่อ hover */
-}
-
-/* ตั้งค่าให้ปุ่ม */
+/* เพิ่มการจัดรูปแบบให้กับปุ่ม */
 button {
   background-color: #ff66b2; /* สีชมพูสด */
   color: white;
@@ -84,9 +67,6 @@ button {
   border-radius: 8px;
   transition: background-color 0.3s ease, transform 0.3s ease;
   font-size: 1rem;
-  width: 100%; /* ปุ่มเต็มความกว้าง */
-  display: inline-block;
-  text-align: center;
 }
 
 button:hover {
@@ -98,51 +78,36 @@ button:focus {
   outline: none;
 }
 
-button:active {
-  transform: scale(0.98); /* ทำให้ปุ่มดูเหมือนกด */
-}
-
-button.disabled {
-  background-color: #e0e0e0; /* สีปุ่มเมื่อ disabled */
-  cursor: not-allowed; /* ป้องกันการคลิก */
-}
-
-/* ปรับปุ่มเมื่อวันหยุด */
-button.holiday {
-  background-color: #ffb3d9; /* สีพาสเทล */
-}
-
-button.holiday:hover {
-  background-color: #ff80b3; /* สีเข้มขึ้นเมื่อ hover */
-}
-
-button.workday {
-  background-color: #b3ffcc; /* สีเขียวพาสเทล */
-}
-
-button.workday:hover {
-  background-color: #80e0b3; /* สีเข้มขึ้นเมื่อ hover */
-}
-
-/* ปรับให้ตารางรองรับมือถือ */
+/* ปรับขนาดปุ่มให้เหมาะสมกับมือถือ */
 @media screen and (max-width: 768px) {
   table {
-    font-size: 0.9rem;
-    display: block;
-    overflow-x: auto;
+    font-size: 0.9rem; /* ปรับขนาดฟอนต์ให้เล็กลง */
+    width: 100%; /* ทำให้ตารางยืดเต็มหน้าจอ */
+    overflow-x: auto; /* เพิ่มการเลื่อนเมื่อข้อมูลเกินขนาด */
+    display: block; /* ทำให้ตารางเป็น block */
   }
 
   th, td {
-    padding: 10px;
+    padding: 10px; /* ลดขนาด padding */
+  }
+
+  .container {
+    padding: 15px;
   }
 
   button {
-    padding: 10px 20px;
+    padding: 10px 20px; /* ปรับขนาดปุ่มให้พอดี */
+    width: 100%; /* ปรับให้ปุ่มเต็มความกว้าง */
+  }
+
+  /* ปรับขนาดฟอนต์ของ header และ cell */
+  th, td {
+    font-size: 0.9rem;
   }
 }
 
-/* สำหรับหน้าจอขนาด iPhone 6/7/8 Plus (750px) */
-@media screen and (max-width: 750px) {
+/* สำหรับมือถือ (ขนาดหน้าจอสูงสุด 600px) */
+@media screen and (max-width: 600px) {
   body {
     padding: 10px;
   }
@@ -152,48 +117,33 @@ button.workday:hover {
   }
 
   table {
-    font-size: 0.9rem; /* ลดขนาดฟอนต์บนหน้าจอใหญ่ขึ้น */
+    font-size: 0.8rem; /* ลดขนาดฟอนต์ให้เล็กลง */
+    width: 100%; /* ทำให้ตารางยืดเต็มหน้าจอ */
+    display: block; /* ทำให้ตารางเป็น block */
+    overflow-x: auto; /* เลื่อนในแนวนอนเมื่อข้อมูลเกินขนาด */
   }
 
   th, td {
-    padding: 10px; /* ปรับขนาด padding ของตาราง */
+    padding: 8px; /* ลดขนาด padding */
   }
 
   button {
-    padding: 10px 20px;
-    font-size: 1rem; /* ขนาดฟอนต์ปุ่ม */
+    padding: 10px 20px; /* ปรับขนาดปุ่ม */
   }
 }
 
-/* สำหรับแถวที่เป็นวันหยุด */
-tr.bg-gray-100 {
-  background-color: #ffe6f7; /* สีชมพูพาสเทล */
-  color: #ff66b2; /* สีชมพูสด */
-}
+/* สำหรับแท็บเล็ต (ขนาดหน้าจอสูงสุด 1024px) */
+@media screen and (max-width: 1024px) {
+  table {
+    font-size: 1rem; /* ลดขนาดฟอนต์เล็กน้อย */
+    width: 100%; /* ทำให้ตารางเต็มความกว้างของหน้าจอ */
+  }
 
-/* สรุปผล */
-.summary-box {
-  margin-top: 20px;
-  border: 2px solid #ff66b2; /* กรอบสีชมพูสด */
-  border-radius: 12px; /* ขอบมน */
-  padding: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* เงาให้ดูมีมิติ */
-}
+  th, td {
+    padding: 10px;
+  }
 
-.summary-box h2 {
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: #ff66b2; /* สีชมพูสด */
-  margin-bottom: 12px;
-}
-
-.summary-box p {
-  font-size: 1rem;
-  margin: 8px 0;
-  color: #555; /* ข้อความสีเทา */
-}
-
-.summary-box strong {
-  font-weight: bold;
-  color: #ff66b2; /* สีชมพูสด */
+  button {
+    padding: 12px 24px;
+  }
 }
