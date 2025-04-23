@@ -149,8 +149,9 @@ export default function WorkScheduleTable() {
               <td className="border px-2 py-1">
                 <button
                   onClick={() => handleStatusChange(idx, entry.note)}
-                  className={`font-medium py-2 px-4 rounded-lg transition-all duration-300
+                  className={`font-medium py-2 px-4 rounded-lg transition-all duration-300 
       ${entry.note === "วันหยุด" ? "holiday" : "workday"}`}
+                  style={{ width: '100%' }}  // ทำให้ปุ่มกว้างเต็มความกว้าง
                 >
                   {entry.note === "วันหยุด" ? "ยกเลิกวันหยุด" : "ตั้งเป็นวันหยุด"}
                 </button>

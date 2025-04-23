@@ -1,5 +1,5 @@
 /* ใช้ฟอนต์ที่ดูน่ารักและมีสไตล์ */
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500&family=Poppins:wght@300;400;600&family:Sarabun:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500&family:Poppins:wght@300;400;600&family:Sarabun:wght@300;400;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap');
 
 /* พื้นฐานของ body */
@@ -14,11 +14,12 @@ body {
   align-items: center;
   min-height: 100vh;
   flex-direction: column;
+  overflow-x: hidden; /* ป้องกันการเลื่อนในแนวนอน */
 }
 
 /* ตั้งค่าของ container ของตาราง */
 .container {
-  max-width: 1200px;
+  max-width: 100%; /* ใช้ความกว้างสูงสุดของหน้าจอ */
   margin: 0 auto;
   padding: 20px;
   background-color: white;
@@ -26,6 +27,7 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 100%;
   box-sizing: border-box;
+  overflow: hidden; /* ป้องกันการเลื่อนภายในกรอบ */
 }
 
 /* การตั้งค่าตาราง */
@@ -35,132 +37,74 @@ table {
   margin-top: 20px;
   background-color: #ffffff;
   border-radius: 10px;
-  overflow: hidden;
+  table-layout: auto; /* ใช้ auto เพื่อให้คอลัมน์พอดีกับขนาดหน้าจอ */
+}
+
+th, td {
+  padding: 12px;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: 300;
+  color: #444;
 }
 
 th {
   background-color: #ff66b2; /* สีชมพูสด */
   color: white;
-  padding: 12px;
-  text-align: center;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
-td {
-  padding: 12px;
-  border: 1px solid #e0e0e0;
-  text-align: center;
-  vertical-align: middle;
-  font-weight: 300;
-  color: #444;
-  transition: background-color 0.3s ease;
-}
-
-td:hover {
-  background-color: #ffb3d9; /* สีชมพูอ่อนเมื่อ hover */
+/* เพิ่มการจัดรูปแบบให้กับปุ่ม */
+button {
+  background-color: #ff66b2; /* สีชมพูสด */
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-weight: 500;
   cursor: pointer;
-}
-
-tr {
-  transition: background-color 0.3s ease;
-}
-
-tr:hover {
-  background-color: #ffe6f7; /* สีชมพูพาสเทลเมื่อ hover */
-}
-
-/* สถานะ Checkbox */
-input[type="checkbox"] {
-  transform: scale(1.2);
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-input[type="checkbox"]:checked {
-  transform: scale(1.3);
-}
-
-/* สำหรับแถวที่เป็นวันหยุด */
-tr.holiday {
-  background-color: #ffe6f7; /* สีชมพูพาสเทล */
-  color: #ff66b2; /* สีชมพูสด */
-}
-
-/* สรุปผล */
-.summary-box {
-  margin-top: 20px;
-  border: 2px solid #ff66b2; /* กรอบสีชมพูสด */
-  border-radius: 12px; /* ขอบมน */
-  padding: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* เงาให้ดูมีมิติ */
-}
-
-.summary-box h2 {
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: #ff66b2; /* สีชมพูสด */
-  margin-bottom: 12px;
-}
-
-.summary-box p {
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
   font-size: 1rem;
-  margin: 8px 0;
-  color: #555; /* ข้อความสีเทา */
 }
 
-.summary-box strong {
-  font-weight: bold;
-  color: #ff66b2; /* สีชมพูสด */
+button:hover {
+  background-color: #ff3385; /* สีชมพูเข้มขึ้นเมื่อ hover */
+  transform: scale(1.05);
 }
 
-/* ปุ่ม */
-/* ปุ่มวันหยุด */
-button.holiday {
-    background-color: #ff66b2; /* สีชมพู */
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    font-weight: 500;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-  }
-  
-  button.holiday:hover {
-    background-color: #ff3385; /* สีชมพูเข้มขึ้นเมื่อ hover */
-    transform: scale(1.05);
-  }
-  
-  /* ปุ่มวันทำงาน */
-  button.workday {
-    background-color: #4CAF50; /* สีเขียว */
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    font-weight: 500;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-  }
-  
-  button.workday:hover {
-    background-color: #45a049; /* สีเขียวเข้มขึ้นเมื่อ hover */
-    transform: scale(1.05);
-  }
-  
-/* กำหนดสีชมพูให้กับหัวข้อ "ค่าตอบแทน" */
-td.pay-column {
-    color: #ff66b2; /* สีชมพูสด */
-    padding: 12px;
-    text-align: center;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }  
+button:focus {
+  outline: none;
+}
 
-/* ---------------------------- MEDIA QUERIES สำหรับ Responsive ---------------------------- */
+/* ปรับขนาดปุ่มให้เหมาะสมกับมือถือ */
+@media screen and (max-width: 768px) {
+  table {
+    font-size: 0.9rem; /* ปรับขนาดฟอนต์ให้เล็กลง */
+    width: 100%; /* ทำให้ตารางยืดเต็มหน้าจอ */
+    overflow-x: auto; /* เพิ่มการเลื่อนเมื่อข้อมูลเกินขนาด */
+    display: block; /* ทำให้ตารางเป็น block */
+  }
+
+  th, td {
+    padding: 10px; /* ลดขนาด padding */
+  }
+
+  .container {
+    padding: 15px;
+  }
+
+  button {
+    padding: 10px 20px; /* ปรับขนาดปุ่มให้พอดี */
+    width: 100%; /* ปรับให้ปุ่มเต็มความกว้าง */
+  }
+
+  /* ปรับขนาดฟอนต์ของ header และ cell */
+  th, td {
+    font-size: 0.9rem;
+  }
+}
 
 /* สำหรับมือถือ (ขนาดหน้าจอสูงสุด 600px) */
 @media screen and (max-width: 600px) {
@@ -173,71 +117,33 @@ td.pay-column {
   }
 
   table {
-    font-size: 0.9rem; /* ปรับขนาดฟอนต์ให้เล็กลงสำหรับมือถือ */
+    font-size: 0.8rem; /* ลดขนาดฟอนต์ให้เล็กลง */
+    width: 100%; /* ทำให้ตารางยืดเต็มหน้าจอ */
+    display: block; /* ทำให้ตารางเป็น block */
+    overflow-x: auto; /* เลื่อนในแนวนอนเมื่อข้อมูลเกินขนาด */
   }
 
   th, td {
     padding: 8px; /* ลดขนาด padding */
   }
 
-  .summary-box {
-    padding: 15px;
-  }
-
   button {
-    padding: 10px 20px; /* ลดขนาดปุ่ม */
+    padding: 10px 20px; /* ปรับขนาดปุ่ม */
   }
 }
 
 /* สำหรับแท็บเล็ต (ขนาดหน้าจอสูงสุด 1024px) */
 @media screen and (max-width: 1024px) {
-  body {
-    padding: 20px;
-  }
-
-  .container {
-    padding: 20px;
-  }
-
   table {
-    font-size: 1rem; /* ลดขนาดฟอนต์เล็กน้อยสำหรับแท็บเล็ต */
+    font-size: 1rem; /* ลดขนาดฟอนต์เล็กน้อย */
+    width: 100%; /* ทำให้ตารางเต็มความกว้างของหน้าจอ */
   }
 
   th, td {
-    padding: 10px; /* ลดขนาด padding */
-  }
-
-  .summary-box {
-    padding: 20px;
+    padding: 10px;
   }
 
   button {
-    padding: 12px 24px; /* ขนาดปุ่มที่เหมาะสมสำหรับแท็บเล็ต */
-  }
-}
-/* สำหรับมือถือขนาดหน้าจอ 750px หรือเล็กกว่า (iPhone 7+) */
-@media screen and (max-width: 750px) {
-  body {
-    font-size: 14px;  /* ลดขนาดฟอนต์ให้เหมาะสมกับมือถือ */
-  }
-
-  .container {
-    padding: 10px; /* ปรับ padding ให้เล็กลง */
-  }
-
-  table {
-    font-size: 0.9rem; /* ปรับขนาดฟอนต์ของตารางให้เล็กลง */
-  }
-
-  th, td {
-    padding: 8px; /* ลด padding */
-  }
-
-  button {
-    padding: 10px 20px; /* ลดขนาดปุ่ม */
-  }
-
-  .summary-box {
-    padding: 15px;
+    padding: 12px 24px;
   }
 }
