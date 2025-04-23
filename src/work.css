@@ -215,3 +215,29 @@ td.pay-column {
     padding: 12px 24px; /* ขนาดปุ่มที่เหมาะสมสำหรับแท็บเล็ต */
   }
 }
+/* สำหรับมือถือขนาดหน้าจอ 750px หรือเล็กกว่า (iPhone 7+) */
+@media screen and (max-width: 750px) {
+  body {
+    font-size: 14px;  /* ลดขนาดฟอนต์ให้เหมาะสมกับมือถือ */
+  }
+
+  .container {
+    padding: 10px; /* ปรับ padding ให้เล็กลง */
+  }
+
+  table {
+    font-size: 0.9rem; /* ปรับขนาดฟอนต์ของตารางให้เล็กลง */
+  }
+
+  th, td {
+    padding: 8px; /* ลด padding */
+  }
+
+  button {
+    padding: 10px 20px; /* ลดขนาดปุ่ม */
+  }
+
+  .summary-box {
+    padding: 15px;
+  }
+}

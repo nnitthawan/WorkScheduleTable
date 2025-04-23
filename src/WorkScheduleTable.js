@@ -82,6 +82,18 @@ export default function WorkScheduleTable() {
     setWorkDataState(updated);
   };
 
+  const handleStatusChange = (idx, currentStatus) => {
+    // ถามยืนยันผู้ใช้ว่าจะเปลี่ยนสถานะหรือไม่
+    const isConfirmed = window.confirm(
+      `คุณต้องการ ${currentStatus === "วันหยุด" ? "ยกเลิกวันหยุด" : "ตั้งเป็นวันหยุด"} หรือไม่?`
+    );
+
+    if (isConfirmed) {
+      // ดำเนินการเปลี่ยนสถานะ
+      toggleHoliday(idx); // ฟังก์ชันที่คุณใช้ในการเปลี่ยนสถานะ
+    }
+  };
+
   const totalWorkDays = workDataState.filter(d => d.work && d.start).length;
   const totalPay = workDataState.reduce(
     (sum, d) => sum + (d.work && typeof d.pay === "number" ? d.pay : 0),
@@ -136,17 +148,13 @@ export default function WorkScheduleTable() {
               </td>
               <td className="border px-2 py-1">
                 <button
-                  onClick={() => toggleHoliday(idx)}
-                  className={`font-medium py-2 px-4 rounded-lg transition-all duration-300 
-                ${entry.note === "วันหยุด"
-                      ? "holiday"  // คลาสสำหรับปุ่มวันหยุด
-                      : "workday"}  // คลาสสำหรับปุ่มวันทำงาน
-    `}
+                  onClick={() => handleStatusChange(idx, entry.note)}
+                  className={`font-medium py-2 px-4 rounded-lg transition-all duration-300
+      ${entry.note === "วันหยุด" ? "holiday" : "workday"}`}
                 >
                   {entry.note === "วันหยุด" ? "ยกเลิกวันหยุด" : "ตั้งเป็นวันหยุด"}
                 </button>
               </td>
-
             </tr>
           ))}
         </tbody>
