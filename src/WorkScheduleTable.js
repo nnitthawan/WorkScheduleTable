@@ -112,8 +112,7 @@ export default function WorkScheduleTable() {
           <tr className="bg-gray-200 text-center">
             <th className="border px-2 py-1">มาทำงาน</th>
             <th className="border px-2 py-1">วันที่</th>
-            <th className="border px-2 py-1">เข้างาน</th>
-            <th className="border px-2 py-1">เลิกงาน</th>
+            
             <th className="border px-2 py-1 ">ค่าตอบแทน</th>
             <th className="border px-2 py-1">สถานะ</th>
             <th className="border px-2 py-1">จัดการวันหยุด</th>
@@ -140,8 +139,7 @@ export default function WorkScheduleTable() {
                 />
               </td>
               <td className="border px-2 py-1">{entry.date}</td>
-              <td className="border px-2 py-1">{entry.start}</td>
-              <td className="border px-2 py-1">{entry.end}</td>
+              
               <td className="border px-2 py-1 pay-column">{entry.pay}</td>
               <td className="border px-2 py-1 font-medium">
                 {entry.note === "วันหยุด" ? "🎉 วันหยุด" : entry.work ? "✅ ทำงาน" : "❌ ไม่ได้ทำ"}
