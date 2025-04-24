@@ -112,7 +112,6 @@ export default function WorkScheduleTable() {
           <tr className="bg-gray-200 text-center">
             <th className="border px-2 py-1">มาทำงาน</th>
             <th className="border px-2 py-1">วันที่</th>
-            
             <th className="border px-2 py-1 ">ค่าตอบแทน</th>
             <th className="border px-2 py-1">สถานะ</th>
             <th className="border px-2 py-1">จัดการวันหยุด</th>
@@ -120,16 +119,7 @@ export default function WorkScheduleTable() {
         </thead>
         <tbody>
           {workDataState.map((entry, idx) => (
-            <tr
-              key={idx}
-              className={`text-center hover:bg-gray-50 ${entry.note === "วันหยุด"
-                ? "holiday bg-pink-300 text-pink-800 shadow-lg rounded-lg"
-                : entry.work
-                  ? "bg-green-50 text-green-700"
-                  : "bg-yellow-50 text-yellow-700"
-                }`}
-            >
-
+            <tr className={entry.note === "วันหยุด" ? "row-holiday" : "row-workday"}>
               <td className="border px-2 py-1">
                 <input
                   type="checkbox"
@@ -138,23 +128,21 @@ export default function WorkScheduleTable() {
                   onChange={() => toggleWork(idx)}
                 />
               </td>
-              <td className="border px-2 py-1">{entry.date}</td>
-              
-              <td className="border px-2 py-1 pay-column">{entry.pay}</td>
-              <td className="border px-2 py-1 font-medium">
-                {entry.note === "วันหยุด" ? "🎉 วันหยุด" : entry.work ? "✅ ทำงาน" : "❌ ไม่ได้ทำ"}
-              </td>
-              <td className="border px-2 py-1">
-                <button
-                  onClick={() => handleStatusChange(idx, entry.note)}
-                  className={`font-medium py-2 px-4 rounded-lg transition-all duration-300 
-      ${entry.note === "วันหยุด" ? "holiday" : "workday"}`}
-                  style={{ width: '100%' }}  // ทำให้ปุ่มกว้างเต็มความกว้าง
-                >
-                  {entry.note === "วันหยุด" ? "ยกเลิกวันหยุด" : "ตั้งเป็นวันหยุด"}
-                </button>
-              </td>
-            </tr>
+            <td>{entry.date}</td>
+            <td>{entry.pay}</td>
+            <td>{entry.note}</td>
+            <td>
+              {/* ปุ่มตั้งวันหยุด */}
+              <button
+                onClick={() => handleStatusChange(idx, entry.note)}
+                className={`font-medium py-2 px-4 rounded-lg transition-all duration-300 w-full
+                  ${entry.note === "วันหยุด" ? "btn-cancel-holiday" : "btn-set-holiday"}`}
+              >
+                {entry.note === "วันหยุด" ? "ยกเลิกวันหยุด" : "ตั้งเป็นวันหยุด"}
+              </button>
+            </td>
+          </tr>
+          
           ))}
         </tbody>
       </table>

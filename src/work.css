@@ -96,7 +96,7 @@ button:focus {
   }
 
   button {
-    padding: 10px 20px; /* ปรับขนาดปุ่มให้พอดี */
+    padding: 1px 20px; /* ปรับขนาดปุ่มให้พอดี */
     width: 100%; /* ปรับให้ปุ่มเต็มความกว้าง */
   }
 
@@ -117,7 +117,7 @@ button:focus {
   }
 
   table {
-    font-size: 0.8rem; /* ลดขนาดฟอนต์ให้เล็กลง */
+    font-size: 0.3rem; /* ลดขนาดฟอนต์ให้เล็กลง */
     width: 100%; /* ทำให้ตารางยืดเต็มหน้าจอ */
     display: block; /* ทำให้ตารางเป็น block */
     overflow-x: auto; /* เลื่อนในแนวนอนเมื่อข้อมูลเกินขนาด */
@@ -146,4 +146,38 @@ button:focus {
   button {
     padding: 12px 24px;
   }
+}
+
+.row-holiday {
+  background-color: #fce7f3; /* พื้นหลังชมพูอ่อนมาก */
+}
+
+.btn-set-holiday,
+.btn-cancel-holiday {
+  padding: 0.3rem 0.75rem;
+  font-size: 0.85rem;
+  border-radius: 0.375rem;
+}
+
+.btn-set-holiday {
+  background-color: #f472b6; /* ชมพูหวาน */
+  color: white;
+  border: 2px solid #ec4899;
+}
+
+.btn-set-holiday:hover {
+  background-color: #ec4899; /* ชมพูเข้ม */
+  transform: scale(1.03);
+}
+
+.btn-cancel-holiday {
+  background-color: #d1d5db; /* เทาอ่อน */
+  color: #374151; /* เทาเข้ม */
+  border: 2px solid #9ca3af;
+}
+
+.btn-cancel-holiday:hover {
+  background-color: #9ca3af;
+  color: white;
+  transform: scale(1.03);
 }
