@@ -100,13 +100,11 @@ button:focus {
     width: 100%; /* ปรับให้ปุ่มเต็มความกว้าง */
   }
 
-  /* ปรับขนาดฟอนต์ของ header และ cell */
   th, td {
     font-size: 0.9rem;
   }
 }
 
-/* สำหรับมือถือ (ขนาดหน้าจอสูงสุด 600px) */
 @media screen and (max-width: 600px) {
   body {
     padding: 10px;
@@ -149,8 +147,28 @@ button:focus {
 }
 
 .row-holiday {
-  background-color: #fce7f3; /* พื้นหลังชมพูอ่อนมาก */
+  background-color: #ffecec;
+  color: #cc0000;
 }
+
+.row-workday {
+  background-color: #f0fff0;
+}
+
+.btn-set-holiday {
+  background-color: #fbbf24;
+  color: white;
+}
+
+.btn-cancel-holiday {
+  background-color: #60a5fa;
+  color: white;
+}
+
+table th, table td {
+  text-align: center;
+}
+
 
 .btn-set-holiday,
 .btn-cancel-holiday {

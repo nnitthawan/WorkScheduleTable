@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './work.css';
 
 const initialWorkData = [
@@ -50,7 +50,14 @@ const initialWorkData = [
 ];
 
 export default function WorkScheduleTable() {
-  const [workDataState, setWorkDataState] = useState(initialWorkData);
+  const [workDataState, setWorkDataState] = useState(() => {
+    const savedData = localStorage.getItem("initialWorkData");
+    return savedData ? JSON.parse(savedData) : initialWorkData;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("initialWorkData", JSON.stringify(workDataState));
+  }, [workDataState]);
 
   const toggleWork = (index) => {
     const updated = [...workDataState];
@@ -83,14 +90,11 @@ export default function WorkScheduleTable() {
   };
 
   const handleStatusChange = (idx, currentStatus) => {
-    // ถามยืนยันผู้ใช้ว่าจะเปลี่ยนสถานะหรือไม่
     const isConfirmed = window.confirm(
       `คุณต้องการ ${currentStatus === "วันหยุด" ? "ยกเลิกวันหยุด" : "ตั้งเป็นวันหยุด"} หรือไม่?`
     );
-
     if (isConfirmed) {
-      // ดำเนินการเปลี่ยนสถานะ
-      toggleHoliday(idx); // ฟังก์ชันที่คุณใช้ในการเปลี่ยนสถานะ
+      toggleHoliday(idx);
     }
   };
 
@@ -112,15 +116,16 @@ export default function WorkScheduleTable() {
           <tr className="bg-gray-200 text-center">
             <th className="border px-2 py-1">มาทำงาน</th>
             <th className="border px-2 py-1">วันที่</th>
-            <th className="border px-2 py-1 ">ค่าตอบแทน</th>
+            <th className="border px-2 py-1">เวลาเข้า-ออก</th>
+            <th className="border px-2 py-1">ค่าตอบแทน</th>
             <th className="border px-2 py-1">สถานะ</th>
             <th className="border px-2 py-1">จัดการวันหยุด</th>
           </tr>
         </thead>
         <tbody>
           {workDataState.map((entry, idx) => (
-            <tr className={entry.note === "วันหยุด" ? "row-holiday" : "row-workday"}>
-              <td className="border px-2 py-1">
+            <tr key={idx} className={entry.note === "วันหยุด" ? "row-holiday" : "row-workday"}>
+              <td className="border px-2 py-1 text-center">
                 <input
                   type="checkbox"
                   checked={entry.work}
@@ -128,21 +133,22 @@ export default function WorkScheduleTable() {
                   onChange={() => toggleWork(idx)}
                 />
               </td>
-            <td>{entry.date}</td>
-            <td>{entry.pay}</td>
-            <td>{entry.note}</td>
-            <td>
-              {/* ปุ่มตั้งวันหยุด */}
-              <button
-                onClick={() => handleStatusChange(idx, entry.note)}
-                className={`font-medium py-2 px-4 rounded-lg transition-all duration-300 w-full
-                  ${entry.note === "วันหยุด" ? "btn-cancel-holiday" : "btn-set-holiday"}`}
-              >
-                {entry.note === "วันหยุด" ? "ยกเลิกวันหยุด" : "ตั้งเป็นวันหยุด"}
-              </button>
-            </td>
-          </tr>
-          
+              <td className="border px-2 py-1 text-center">{entry.date}</td>
+              <td className="border px-2 py-1 text-center">
+                {entry.start && entry.end ? `${entry.start} - ${entry.end}` : "-"}
+              </td>
+              <td className="border px-2 py-1 text-center">{entry.pay || "-"}</td>
+              <td className="border px-2 py-1 text-center">{entry.note || "ทำงาน"}</td>
+              <td className="border px-2 py-1 text-center">
+                <button
+                  onClick={() => handleStatusChange(idx, entry.note)}
+                  className={`font-medium py-1 px-3 rounded-lg transition-all duration-300 w-full
+                    ${entry.note === "วันหยุด" ? "btn-cancel-holiday" : "btn-set-holiday"}`}
+                >
+                  {entry.note === "วันหยุด" ? "ยกเลิกวันหยุด" : "ตั้งเป็นวันหยุด"}
+                </button>
+              </td>
+            </tr>
           ))}
         </tbody>
       </table>
@@ -155,7 +161,6 @@ export default function WorkScheduleTable() {
         <p>📅 วันที่เหลือที่ต้องทำงาน: <strong>{remainingWorkDays}</strong> วัน</p>
         <p>💵 รวมค่าตอบแทนรวม (รวมวันที่ยังไม่ได้ติ๊ก): <strong>{totalSalary.toLocaleString()} บาท</strong></p>
       </div>
-
     </div>
   );
 }
